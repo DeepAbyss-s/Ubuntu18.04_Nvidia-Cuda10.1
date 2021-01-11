@@ -29,15 +29,19 @@ echo "   "
 read -p "Do you want to install cuda 10.1 and nvidia-driver? [y/n] " yn  #  version check
 case $yn in
   [Yy]* ) release="ubuntu"$(lsb_release -sr | sed -e "s/\.//g")
-  echo $release
-  sudo apt install sudo gnupg
-  sudo apt-key adv --fetch-keys "http://developer.download.nvidia.com/compute/cuda/repos/"$release"/x86_64/7fa2af80.pub"
-  sudo sh -c 'echo "deb http://developer.download.nvidia.com/compute/cuda/repos/'$release'/x86_64 /" > /etc/apt/sources.list.d/nvidia-cuda.list'
-  sudo sh -c 'echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/'$release'/x86_64 /" > /etc/apt/sources.list.d/nvidia-machine-learning.list'
-  sudo apt update
-  sudo apt-get install cuda-10-1
-  echo " - 버전 확인 "
-  cat /usr/local/cuda/version.txt
+echo $release
+
+sudo apt install sudo gnupg
+sudo apt-key adv --fetch-keys "http://developer.download.nvidia.com/compute/cuda/repos/"$release"/x86_64/7fa2af80.pub"
+sudo sh -c 'echo "deb http://developer.download.nvidia.com/compute/cuda/repos/'$release'/x86_64 /" > /etc/apt/sources.list.d/nvidia-cuda.list'
+sudo sh -c 'echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/'$release'/x86_64 /" > /etc/apt/sources.list.d/nvidia-machine-learning.list'
+sudo apt update
+
+sudo apt-get install cuda-10-1
+
+
+echo " - 쿠다 버전 확인"
+cat /usr/local/cuda/version.txt
   echo " "
   echo " please reboot your system!";;
 
